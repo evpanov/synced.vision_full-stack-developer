@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('open_weather_map', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('dt');
-            $table->string('city');
+            $table->integer('dt')->unsigned();
+            $table->integer('city_id')->unsigned()->unique();
+            $table->string('city_name');
             $table->float('temperature_min');
             $table->float('temperature_max');
             $table->float('wind_speed');
