@@ -37,6 +37,15 @@ RUN apt-get update -yqq \
 # ERROR: Unable to create the PID file (/run/php/php8.0-fpm.pid).: No such file or directory
 RUN mkdir /run/php
 
+RUN  curl -sL https://deb.nodesource.com/setup_current.x | bash - \
+    && apt-get purge -y nodejs npm \
+    && apt-get install -y nodejs build-essential \
+    && npm install -g gulp \
+    && npm install -g bower \
+    && npm install -g less \
+    && npm install -g sass \
+    && npm install -g serve
+
 RUN apt-get clean
 
 RUN sed -i "s/^listen =.*$/listen = 9000/g" /etc/php/${IMAGE_PHP_VERSION}/fpm/pool.d/www.conf

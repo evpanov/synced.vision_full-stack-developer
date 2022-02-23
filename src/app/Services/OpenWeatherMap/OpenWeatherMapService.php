@@ -51,19 +51,19 @@ class OpenWeatherMapService
 
     public function storeData(): bool
     {
-        $parsedBody = $this->getData();
+        $data = $this->getDataForStoring();
 
-        if ($parsedBody[OpenWeatherMapFields::CITY_ID->value] === null) {
+        if ($data[OpenWeatherMapFields::CITY_ID->value] === null) {
             throw new OpenWeatherMapException(OpenWeatherMapExceptionMessages::INCOMPLETE_DATA->value);
         }
 
-        $model = OpenWeatherMapModel::where(OpenWeatherMapFields::CITY_ID->value, $parsedBody[OpenWeatherMapFields::CITY_ID->value])
+        $model = OpenWeatherMapModel::where(OpenWeatherMapFields::CITY_ID->value, $data[OpenWeatherMapFields::CITY_ID->value])
             ->first();
 
         if ($model === null) {
-            $model = new OpenWeatherMapModel($parsedBody);
+            $model = new OpenWeatherMapModel($data);
         } else {
-            $model->fill($parsedBody);
+            $model->fill($data);
         }
 
         $model->save();
@@ -77,7 +77,12 @@ class OpenWeatherMapService
         return $this;
     }
 
-    public function getData(): array
+    public function getResponseBody(): string
+    {
+        return $this->responseBody;
+    }
+
+    private function getDataForStoring(): array
     {
         $decodedBody = json_decode($this->responseBody);
 
