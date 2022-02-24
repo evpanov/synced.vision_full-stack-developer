@@ -1,5 +1,5 @@
-import {REQUESTING_DATA, ROWS} from "./Reducer";
-import {receivedData, requestData} from "./Actions";
+import {REQUESTING_DATA, DATA, FIELD_CITY} from "./Reducer";
+import {changeTextFieldValue, receivedData, requestData} from "./Actions";
 import {connect} from "react-redux";
 import Container from "./Container";
 
@@ -7,12 +7,14 @@ const mapStateToProps = state => {
     const reducerState = state.IndexReducer
     return {
         scope: reducerState.scope,
+        [FIELD_CITY]: reducerState[FIELD_CITY],
         [REQUESTING_DATA]: reducerState[REQUESTING_DATA],
-        [ROWS]: reducerState[ROWS]
+        [DATA]: reducerState[DATA]
     };
 };
 
 const mapDispatchToProps = {
+    changeTextFieldValue,
     requestData,
     receivedData
 };

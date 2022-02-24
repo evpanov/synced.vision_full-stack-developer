@@ -25513,11 +25513,19 @@ var BaseReducer = function BaseReducer(initialState, actions) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "changeTextFieldValue": () => (/* binding */ changeTextFieldValue),
 /* harmony export */   "requestData": () => (/* binding */ requestData),
 /* harmony export */   "receivedData": () => (/* binding */ receivedData)
 /* harmony export */ });
 /* harmony import */ var _Reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Reducer */ "./resources/js/components/Index/Reducer.js");
 
+var changeTextFieldValue = function changeTextFieldValue(self, type, event) {
+  return {
+    scope: self.props.scope,
+    type: type,
+    payload: event.target.value
+  };
+};
 var requestData = function requestData(self) {
   return {
     scope: self.props.scope,
@@ -25623,10 +25631,12 @@ var Container = /*#__PURE__*/function (_Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ON_CHANGE": () => (/* binding */ ON_CHANGE),
+/* harmony export */   "FIELD_CITY": () => (/* binding */ FIELD_CITY),
 /* harmony export */   "REQUESTING_DATA": () => (/* binding */ REQUESTING_DATA),
 /* harmony export */   "ON_REQUEST_DATA": () => (/* binding */ ON_REQUEST_DATA),
 /* harmony export */   "ON_RECEIVED_DATA": () => (/* binding */ ON_RECEIVED_DATA),
-/* harmony export */   "ROWS": () => (/* binding */ ROWS),
+/* harmony export */   "DATA": () => (/* binding */ DATA),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _BaseReducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../BaseReducer */ "./resources/js/components/BaseReducer.js");
@@ -25639,25 +25649,29 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+var ON_CHANGE = 'ON_CHANGE_';
+var FIELD_CITY = 'FIELD_CITY';
 var REQUESTING_DATA = 'REQUESTING_DATA';
 var ON_REQUEST_DATA = 'ON_REQUEST_DATA';
 var ON_RECEIVED_DATA = 'ON_RECEIVED_DATA';
-var ROWS = 'ROWS';
+var DATA = 'DATA';
 var initialState = (_initialState = {
   scope: 'INDEX'
-}, _defineProperty(_initialState, REQUESTING_DATA, false), _defineProperty(_initialState, ROWS, []), _initialState);
+}, _defineProperty(_initialState, FIELD_CITY, ''), _defineProperty(_initialState, REQUESTING_DATA, false), _defineProperty(_initialState, DATA, []), _initialState);
 
 var actions = function actions(state, action) {
   var _ref;
 
-  return _ref = {}, _defineProperty(_ref, ON_REQUEST_DATA, function () {
-    var _objectSpread2;
-
-    return _objectSpread(_objectSpread({}, state), {}, (_objectSpread2 = {}, _defineProperty(_objectSpread2, REQUESTING_DATA, true), _defineProperty(_objectSpread2, ROWS, []), _objectSpread2));
-  }), _defineProperty(_ref, ON_RECEIVED_DATA, function () {
+  return _ref = {}, _defineProperty(_ref, ON_CHANGE + FIELD_CITY, function () {
+    return _objectSpread(_objectSpread({}, state), {}, _defineProperty({}, FIELD_CITY, action.payload));
+  }), _defineProperty(_ref, ON_REQUEST_DATA, function () {
     var _objectSpread3;
 
-    return _objectSpread(_objectSpread({}, state), {}, (_objectSpread3 = {}, _defineProperty(_objectSpread3, REQUESTING_DATA, false), _defineProperty(_objectSpread3, ROWS, action.payload), _objectSpread3));
+    return _objectSpread(_objectSpread({}, state), {}, (_objectSpread3 = {}, _defineProperty(_objectSpread3, REQUESTING_DATA, true), _defineProperty(_objectSpread3, DATA, []), _objectSpread3));
+  }), _defineProperty(_ref, ON_RECEIVED_DATA, function () {
+    var _objectSpread4;
+
+    return _objectSpread(_objectSpread({}, state), {}, (_objectSpread4 = {}, _defineProperty(_objectSpread4, REQUESTING_DATA, false), _defineProperty(_objectSpread4, DATA, action.payload), _objectSpread4));
   }), _ref;
 };
 
@@ -25693,10 +25707,11 @@ var mapStateToProps = function mapStateToProps(state) {
   var reducerState = state.IndexReducer;
   return _ref = {
     scope: reducerState.scope
-  }, _defineProperty(_ref, _Reducer__WEBPACK_IMPORTED_MODULE_0__.REQUESTING_DATA, reducerState[_Reducer__WEBPACK_IMPORTED_MODULE_0__.REQUESTING_DATA]), _defineProperty(_ref, _Reducer__WEBPACK_IMPORTED_MODULE_0__.ROWS, reducerState[_Reducer__WEBPACK_IMPORTED_MODULE_0__.ROWS]), _ref;
+  }, _defineProperty(_ref, _Reducer__WEBPACK_IMPORTED_MODULE_0__.FIELD_CITY, reducerState[_Reducer__WEBPACK_IMPORTED_MODULE_0__.FIELD_CITY]), _defineProperty(_ref, _Reducer__WEBPACK_IMPORTED_MODULE_0__.REQUESTING_DATA, reducerState[_Reducer__WEBPACK_IMPORTED_MODULE_0__.REQUESTING_DATA]), _defineProperty(_ref, _Reducer__WEBPACK_IMPORTED_MODULE_0__.DATA, reducerState[_Reducer__WEBPACK_IMPORTED_MODULE_0__.DATA]), _ref;
 };
 
 var mapDispatchToProps = {
+  changeTextFieldValue: _Actions__WEBPACK_IMPORTED_MODULE_1__.changeTextFieldValue,
   requestData: _Actions__WEBPACK_IMPORTED_MODULE_1__.requestData,
   receivedData: _Actions__WEBPACK_IMPORTED_MODULE_1__.receivedData
 };
@@ -25716,14 +25731,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ View)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/system/esm/ThemeProvider/ThemeProvider.js");
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/Box/Box.js");
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/Container/Container.js");
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/Grid/Grid.js");
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/TextField/TextField.js");
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/Button/Button.js");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/system/esm/ThemeProvider/ThemeProvider.js");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/Box/Box.js");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/Container/Container.js");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/Grid/Grid.js");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/TextField/TextField.js");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/Button/Button.js");
 /* harmony import */ var _muiTheme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../muiTheme */ "./resources/js/muiTheme.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _Reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Reducer */ "./resources/js/components/Index/Reducer.js");
+/* harmony import */ var _Actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Actions */ "./resources/js/components/Index/Actions.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25752,6 +25769,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var View = /*#__PURE__*/function (_Component) {
   _inherits(View, _Component);
 
@@ -25766,39 +25785,45 @@ var View = /*#__PURE__*/function (_Component) {
   _createClass(View, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      var _this = this;
+
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_5__["default"], {
         theme: _muiTheme__WEBPACK_IMPORTED_MODULE_1__.muiTheme,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_4__["default"], {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], {
             maxWidth: "xl",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
-              children: "Weather"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_6__["default"], {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h1", {
+              children: ["Weather ", this.props[_Reducer__WEBPACK_IMPORTED_MODULE_2__.FIELD_CITY]]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_8__["default"], {
               container: true,
               spacing: 2,
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_6__["default"], {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_8__["default"], {
                 item: true,
                 xs: 6,
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_9__["default"], {
                   id: "outlined-basic",
                   label: "City",
                   variant: "standard",
-                  fullWidth: true
+                  fullWidth: true,
+                  onChange: function onChange(event) {
+                    return _this.props.changeTextFieldValue(_this, _Reducer__WEBPACK_IMPORTED_MODULE_2__.ON_CHANGE + _Reducer__WEBPACK_IMPORTED_MODULE_2__.FIELD_CITY, event);
+                  },
+                  value: this.props[_Reducer__WEBPACK_IMPORTED_MODULE_2__.FIELD_CITY]
                 })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_6__["default"], {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_8__["default"], {
                 item: true,
                 xs: 3,
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_8__["default"], {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_10__["default"], {
                   variant: "contained",
                   color: "secondary",
                   fullWidth: true,
                   size: "large",
                   children: "Get from API"
                 })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_6__["default"], {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_8__["default"], {
                 item: true,
                 xs: 3,
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_8__["default"], {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_10__["default"], {
                   variant: "contained",
                   color: "success",
                   fullWidth: true,
@@ -25806,7 +25831,7 @@ var View = /*#__PURE__*/function (_Component) {
                   children: "Get from DB"
                 })
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("hr", {})]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("hr", {})]
           })
         })
       });

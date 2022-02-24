@@ -1,6 +1,8 @@
 import {Component} from "react";
 import {AlertTitle, Box, Button, Container, Grid, TextField, ThemeProvider} from "@mui/material";
 import {muiTheme} from "../../muiTheme";
+import {FIELD_CITY, ON_CHANGE} from "./Reducer";
+import {changeTextFieldValue} from "./Actions";
 
 export default class View extends Component {
     render() {
@@ -8,7 +10,7 @@ export default class View extends Component {
             <ThemeProvider theme={muiTheme}>
                 <Box>
                     <Container maxWidth={"xl"}>
-                        <h1>Weather</h1>
+                        <h1>Weather {this.props[FIELD_CITY]}</h1>
                         <Grid container spacing={2}>
                             <Grid item xs={6}>
                                 <TextField
@@ -16,6 +18,8 @@ export default class View extends Component {
                                     label="City"
                                     variant="standard"
                                     fullWidth
+                                    onChange={(event => this.props.changeTextFieldValue(this, ON_CHANGE + FIELD_CITY, event))}
+                                    value={this.props[FIELD_CITY]}
                                 />
                             </Grid>
                             <Grid item xs={3}>
