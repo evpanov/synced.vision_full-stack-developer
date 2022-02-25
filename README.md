@@ -5,7 +5,8 @@
 3. docker exec -it synced_vision__full-stack-developer-php_fpm bash
 4. cd /opt/application
 5. composer install
-6. php ./artisan migrate
-7. npm install
-8. npm run dev
-9. http://127.0.0.1:22080/
+6. cp .env.development .env
+7. php ./artisan migrate
+8. npm install
+9. npm run dev
+10. http://127.0.0.1:22080/
