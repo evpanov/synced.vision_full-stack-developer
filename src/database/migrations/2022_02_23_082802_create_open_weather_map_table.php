@@ -18,9 +18,9 @@ return new class extends Migration
             $table->integer('dt')->unsigned();
             $table->integer('city_id')->unsigned()->unique();
             $table->string('city_name');
-            $table->float('temperature_min');
-            $table->float('temperature_max');
-            $table->float('wind_speed');
+            $table->decimal('temperature_min');
+            $table->decimal('temperature_max');
+            $table->decimal('wind_speed');
             $table->timestamps();
         });
     }

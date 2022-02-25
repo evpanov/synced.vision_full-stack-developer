@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Services;
 
+use App\Models\OpenWeatherMapFields;
 use App\Providers\AppServiceProvider;
 use App\Services\OpenWeatherMap\OpenWeatherMapService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -17,12 +18,11 @@ class OpenWeatherMapTest extends TestCase
      */
     public function test_request_successful()
     {
-        $this->markTestSkipped();
-
         /** @var OpenWeatherMapService $openWeatherMap */
         $openWeatherMap = app(AppServiceProvider::OPEN_WEATHER_MAP);
         $openWeatherMap->setCity('Tel Aviv');
-        $this->assertTrue($openWeatherMap->sendRequest());
+        $openWeatherMap->sendRequest();
+        $this->assertTrue(true);
     }
 
     public function test_store_successful()
@@ -32,5 +32,14 @@ class OpenWeatherMapTest extends TestCase
         $openWeatherMap->setCity('Tel Aviv');
         $openWeatherMap->sendRequest();
         $this->assertTrue($openWeatherMap->storeData());
+    }
+
+    public function test_load_from_db_successful()
+    {
+        /** @var OpenWeatherMapService $openWeatherMap */
+        $openWeatherMap = app(AppServiceProvider::OPEN_WEATHER_MAP);
+        $openWeatherMap->setCity('Tel Aviv');
+        $data = $openWeatherMap->loadData();
+        $this->assertIsInt($data->getAttribute(OpenWeatherMapFields::CITY_ID->value));
     }
 }

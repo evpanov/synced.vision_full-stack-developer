@@ -23,7 +23,7 @@ class OpenWeatherMapService
     public function sendRequest(): void
     {
         $query = [
-            'q' => trim($this->city),
+            'q' => $this->city,
             'units' => 'metric',
             'appid' => $this->appid
         ];
@@ -69,6 +69,11 @@ class OpenWeatherMapService
         $model->save();
 
         return true;
+    }
+
+    public function loadData(): ?OpenWeatherMapModel
+    {
+        return OpenWeatherMapModel::where(OpenWeatherMapFields::CITY_NAME->value, $this->city)->first();
     }
 
     public function setCity(string $city): self

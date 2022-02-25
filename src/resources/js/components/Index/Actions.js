@@ -6,12 +6,14 @@ export const changeTextFieldValue = (self, type, event) => ({
     payload: event.target.value
 });
 
-export const requestData = (self) => ({
+export const requestData = (self, source) => ({
     scope: self.props.scope,
-    type: ON_REQUEST_DATA
+    type: ON_REQUEST_DATA,
+    payload: source
 });
 
 export const receivedData = (self, data) => ({
     scope: self.props.scope,
-    type: ON_RECEIVED_DATA
+    type: ON_RECEIVED_DATA,
+    payload: data
 });

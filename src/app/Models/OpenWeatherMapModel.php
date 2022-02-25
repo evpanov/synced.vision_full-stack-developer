@@ -21,4 +21,9 @@ class OpenWeatherMapModel extends Model
 
         parent::__construct($attributes);
     }
+
+    public function getDtAttribute(): string
+    {
+        return date('Y-m-d h:i:s a', $this->attributes[OpenWeatherMapFields::DT->value]);
+    }
 }
